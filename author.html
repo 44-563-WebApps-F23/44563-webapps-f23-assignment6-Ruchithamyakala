@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Creating HTML page for Author</title>
 </head>
+
 <body>
 
-<h2>Author entry Ruchitha Myakala</h2>
+    <h2>Author entry Ruchitha Myakala</h2>
 
-<form>
-    <label for="secretAuthor">The hidden author name</label>
-    <input type ="password" id="secretAuthor" value="Dickens" required><br><br>
-    <label for="guessAuthor">Guess the author</label>
-    <input type="text" id="guessAuthor" required> <br><br>
-    <input type="button" value="Check the guess" onclick="checkAuthor()">
-</form>
-<div id="result">
-    <p>Good guesses: <span id="goodCount">0</span></p>
-    <p>Incorrect guesses: <span id="oopsCount">0</span></p>
-</div>
-<script> 
+    <form>
+        <label for="secretAuthor">The hidden author name</label>
+        <input type="password" id="secretAuthor" value="Dickens" required><br><br>
+        <label for="guessAuthor">Guess the author</label>
+        <input type="text" id="guessAuthor" required> <br><br>
+        <input type="button" value="Check the guess" onclick="checkAuthor()">
+    </form>
+    <div id="result">
+        <p>Good guesses: <span id="goodCount">0</span></p>
+        <p>Incorrect guesses: <span id="oopsCount">0</span></p>
+    </div>
+    <script>
 
         var good = 0;
         var oops = 0;
@@ -26,17 +28,38 @@
             var secretAuthor = document.getElementById("secretAuthor").value;
             var guessAuthor = document.getElementById("guessAuthor").value;
             if (secretAuthor === guessAuthor) {
-                good++; 
+                good++;
                 alert("You got it right!");
             } else {
-                oops++; 
+                oops++;
                 alert("Sorry.");
             }
             document.getElementById("goodCount").textContent = good;
             document.getElementById("oopsCount").textContent = oops;
         }
-</script>
+        <div id="imageContainer">
+            img id="cityImage" src="Miami.jpeg" alt="City Image" width="100" height="100" onclick="selectImage()"
+        </div>
+        var useImage = 1;
+        function selectImage() {
+            switch (useImage) {
+                case 1:
+                    document.getElementById("cityImage").src = "Austin.jpg";
+                    useImage = 2;
+                    break;
+                case 2:
+                    document.getElementById("cityImage").src = "Miami.jpeg";
+                    useImage = 3;
+                    break;
+                case 3:
+                    document.getElementById("cityImage").src = "Yorkville.jpeg";
+                    useImage = 1;
+                    break;
+                default:
+                    break;
+            }
+        }
+    </script>
 </body>
+
 </html>
-
-
