@@ -18,59 +18,65 @@
 <body>
 
     <h2>Author entry Ruchitha Myakala</h2>
-
     <form>
-        <label for="secretAuthor">The hidden author name</label>
-        <input type="password" id="secretAuthor" value="Dickens" required><br><br>
-        <label for="guessAuthor">Guess the author</label>
-        <input type="text" id="guessAuthor" required> <br><br>
-        <input type="button" value="Check the guess" onclick="checkAuthor()">
-    </form>
-    <div id="result">
-        <p>Good guesses: <span id="goodCount">0</span></p>
-        <p>Incorrect guesses: <span id="oopsCount">0</span></p>
-    </div>
+        <div class="form-group">
+            <label for="password_assign">The hidden author name</label>
+            <input type="password" id="password_assign" value="Dickens" min=10 max=50 step=2 value=30><br><br>
+        </div>
+        <div class="form-group">
+            <label for="Author_name">Guess the author</label>
+            <input type="text" id="Author_name" autofocus><br><br>
+        </div>
+        <input type="button" id="button" onclick="checkAuthor()" value="Check the guess">
 
+    </form>
+    <p class="text-left" id="results">The result will be displayed</p>
     <script>
+
         var good = 0;
         var oops = 0;
         function checkAuthor() {
-            var secretAuthor = document.getElementById("secretAuthor").value;
-            var guessAuthor = document.getElementById("guessAuthor").value;
-            if (secretAuthor === guessAuthor) {
-                good++;
-                alert("You got it right!");
-            } else {
-                oops++;
-                alert("Sorry.");
+            console.log("Getting form values")
+            password_assign = document.getElementById("password_assign").value;
+            Author_name = document.getElementById("Author_name").value;
+
+            if (oops == 7) {
+                alert("Sorry, ran out of guesses.");
+                document.getElementById("results").innerHTML = "Sorry, ran out of guesses";
+                document.getElementById("button").style.visibility = 'hidden';
             }
-            document.getElementById("goodCount").textContent = good;
-            document.getElementById("oopsCount").textContent = oops;
+            else if (password_assign === Author_name) {
+                good++;
+                alert("You got it right");
+                results = document.getElementById("results").innerHTML = `right: ${good}, wrong: ${oops}`;
+            }
+            else {
+                oops++;
+                alert("Sorry");
+                results = document.getElementById("results").innerHTML = `right: ${good}, wrong: ${oops}`;
+            }
         }
     </script>
-
-    <div id="imageContainer">
-        <img id="cityImage" src="Miami.jpeg" alt="City Image" width="100" height="100" onclick="selectImage()">
+    <div class="text-center">
+        <img id="cityImage" style="height: 100px; width: 100px;" src="Miami.jpeg" alt="Image of the cities"
+            onclick="selectImage()">
     </div>
-
     <script>
         var useImage = 1;
         function selectImage() {
+            var image = document.getElementById("cityImage");
             switch (useImage) {
                 case 1:
-                    document.getElementById("cityImage").src = "Austin.jpg";
+                    image.src = " Austin.jpg";
                     useImage = 2;
                     break;
                 case 2:
-                    document.getElementById("cityImage").src = "Miami.jpeg";
+                    image.src = "Miami.jpeg";
                     useImage = 3;
                     break;
-                case 3:
-                    document.getElementById("cityImage").src = "Yorkville.jpeg";
-                    useImage = 1;
-                    break;
                 default:
-                    break;
+                    image.src = "Yorkville.jpeg";
+                    useImage = 1;
             }
         }
     </script>
